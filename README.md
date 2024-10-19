@@ -6,17 +6,18 @@
 
 `[Unity ver.: 6.0.23f1]`
 
+
 <center>
 
 ![Gameplay & Cabinet](Docs/cabinet.jpg)
 
 </center>
 
+
 ## Diseño
----
+
 
 ### Concepto
----
 
 - **Título:** PONG
 
@@ -34,8 +35,8 @@
 
   - Ganará el partido el jugador que más puntos consiga.
 
+
 ### Elementos de diseño
----
 
 <center>
 
@@ -44,7 +45,6 @@
 </center>
 
 ### Mecánicas
----
 
 - Cada jugador maneja su pala verticalmente.
 
@@ -67,7 +67,6 @@
 - Se reproducirán sonidos en los rebotes y al conseguir puntos.
 
 ### Mecánicas adicionales (práctica)
----
 
 - Aumentar la velocidad de la pelota a medida que rebota.
 
