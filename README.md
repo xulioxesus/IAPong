@@ -66,7 +66,7 @@
 
 - Se reproducirán sonidos en los rebotes y al conseguir puntos.
 
-### Mecánicas adicionales (prácticas)
+### Mecánicas adicionales (práctica)
 ---
 
 - Aumentar la velocidad de la pelota a medida que rebota.
