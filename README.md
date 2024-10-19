@@ -8,7 +8,7 @@
 
 <center>
 
-![Elementos de diseño](Docs/gameplay.png)
+![Gameplay & Cabinet](Docs/cabinet.jpg)
 
 </center>
 
