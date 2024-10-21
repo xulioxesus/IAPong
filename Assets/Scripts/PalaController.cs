@@ -7,25 +7,18 @@ public class PalaController : MonoBehaviour
 
     [SerializeField] float speed = 7f;
 
-    // Se invoca una vez, después de que se crea el MonoBehaviour, antes de la primera ejecución de Update 
-    void Start()
-    {
-
-    }
-
     // Se invoca una vez por frame
     void Update()
     {
-        if (CompareTag("Pala 1"))
+        if (CompareTag("Pala1"))
         {
             Player1Movement();
         }
-        else if (CompareTag("Pala 2"))
+        else if (CompareTag("Pala2"))
         {
             Player2Movement();
         }
     }
-
 
     // Movimiento de la pala del jugador 1
     void Player1Movement()

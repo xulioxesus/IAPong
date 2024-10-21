@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Pala 1
-  - Pala 2
+  - Pala1
+  - Pala2
+  - Porteria1
+  - Porteria2
   layers:
   - Default
   - TransparentFX
