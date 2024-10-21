@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] Text txtScoreP1;
+    [SerializeField] Text txtScoreP2;
+    [SerializeField] GameObject pelota;
+
     int p1Score;
     int p2Score;
+    bool running = false;
 
     public void AddPointP1()
     {
@@ -15,15 +21,33 @@ public class GameManager : MonoBehaviour
         p2Score++;
     }
 
-    // Se invoca una vez, después de que se crea el MonoBehaviour, antes de la primera ejecución de Update 
     void Start()
     {
-        
+        Cursor.visible = false;
     }
 
-    // Se invoca una vez por frame
     void Update()
     {
-        
+        // Debug.Log($"P1: {p1Score} - P2: {p2Score}");        
+
+        // Salimos del juego al pulsar la tecla Escape
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+        // Iniciamos el juego al pulsar la tecla Espacio
+        if (Input.GetKeyDown(KeyCode.Space) && !running)
+        {
+            running = true;
+            pelota.SetActive(true);
+        }
+    }
+
+    void OnGUI()
+    {
+        // Actualizamos el marcador
+        txtScoreP1.text = p1Score.ToString();
+        txtScoreP2.text = p2Score.ToString();
     }
 }

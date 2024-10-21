@@ -1,14 +1,20 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PelotaController : MonoBehaviour
 {
-    Rigidbody2D rb;
     [SerializeField] float force;
+    [SerializeField] float delay;
+    [SerializeField] GameManager manager;
 
     const float MIN_ANG = 30f;
     const float MAX_ANG = 50f;
+    const float MAX_Y = 2.5f;
+    const float MIN_Y = -2.5f;
 
+    Rigidbody2D rb;
+    
     // Se invoca una vez, después de que se crea el MonoBehaviour, antes de la primera ejecución de Update 
     void Start()
     {
@@ -17,7 +23,12 @@ public class PelotaController : MonoBehaviour
         // Lanzamiento de la pelota
         //rb.AddForce(new Vector2(1, 1) * force, ForceMode2D.Impulse);    
         int direccionX = Random.Range(0, 2) == 0 ? -1 : 1;
-        LanzarPelota(direccionX);
+        StartCoroutine(LanzarPelota(direccionX));
+    }
+
+    void Update() 
+    {
+
     }
 
     // Se invoca en el momento en que el objeto colisiona con otro objeto con un Collider
@@ -35,24 +46,49 @@ public class PelotaController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log($"Gol en {other.gameObject.tag}!!");
+
+        // Actualizamos el marcador y reiniciamos la pelota
+        if (other.gameObject.tag == "Porteria2")
+        {
+            manager.AddPointP1();
+            StartCoroutine(LanzarPelota(1));
+        }
+        else if (other.gameObject.tag == "Porteria1")
+        {
+            manager.AddPointP2();
+            StartCoroutine(LanzarPelota(-1));
+        }
     }
 
-    void LanzarPelota(int direccionX)
+    // Corrutina que lanza la pelota hacia la dirección (X) indicada
+    IEnumerator LanzarPelota(int direccionX)
     {
-        // obtenemos un ángulo aleatorio entre 30 y 50 grados
+        // Esperamos un tiempo (delay) antes de lanzar la pelota
+        yield return new WaitForSeconds(delay);
+
+        // Cálculo de la posición vertical inicial
+        float posY = Random.Range(MIN_Y, MAX_Y);
+        transform.position = new Vector3(0, posY, 0);
+
+        // Cálculo del ángulo de lanzamiento
+        
+        // Obtenemos un ángulo aleatorio entre MIN_ANG y MAX_ANG en grados
         float angulo = Random.Range(MIN_ANG, MAX_ANG);
 
-        // tenemos que convertir el ángulo obtenido a radianes para calcular el coseno y seno
+        // Tenemos que convertir el ángulo obtenido a radianes para calcular el coseno y seno
         angulo *= Mathf.Deg2Rad;
 
-        // coordenada x del vector de impulso
+        // Coordenada x del vector de impulso
         float x = Mathf.Cos(angulo) * direccionX; 
 
-        // coordenada y del vector de impulso
+        // Coordenada y del vector de impulso
         int direccionY = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Mathf.Sin(angulo) * direccionY;
         
+        // Aplicamos el impulso a la pelota
         Vector2 impulso = new Vector2(x, y);
+        //rb.velocity = Vector2.zero;  // obsoleto desde Unity 6
+        rb.linearVelocity = Vector2.zero;
         rb.AddForce(impulso * force, ForceMode2D.Impulse);
     }
 }
