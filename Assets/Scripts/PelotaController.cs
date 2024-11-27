@@ -51,11 +51,15 @@ public class PelotaController : MonoBehaviour
         if (other.gameObject.tag == "Porteria2")
         {
             manager.AddPointP1();
+            transform.position = new Vector3(0, 0, 0);
+            rb.linearVelocity = Vector2.zero;
             StartCoroutine(LanzarPelota(1));
         }
         else if (other.gameObject.tag == "Porteria1")
         {
             manager.AddPointP2();
+            transform.position = new Vector3(0, 0, 0);
+            rb.linearVelocity = Vector2.zero;
             StartCoroutine(LanzarPelota(-1));
         }
     }
